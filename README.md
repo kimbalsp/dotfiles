@@ -1,2 +1,6 @@
-clone to machine and run the following command:\
+# Dotfiles symlinked on my machine
+
+### Install with stow:
+```bash
 stow .
+```
