@@ -59,6 +59,7 @@ alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 
 # VIM
+alias v="/opt/homebrew/bin/nvim"
 
 alias cl="clear"
 
