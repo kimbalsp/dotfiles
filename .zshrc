@@ -35,13 +35,9 @@ alias l="eza -l --icons --git -a"
 alias lt="eza --tree --level=2 --long --icons --git"
 alias ltree="eza --tree --level=2 --icons --git"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 export PATH=$PATH:/Users/spencerkimball/.spicetify
 
-export PATH="$HOME/.rbenv/shims:$PATH"
+eval "$(mise activate zsh)"
 
 # --- Television ---
 
