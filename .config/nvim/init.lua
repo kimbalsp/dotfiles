@@ -1,6 +1,7 @@
+-- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
 
-function Transparent(color)
+function Transparent()
   color = color or "catppuccin"
   vim.cmd.colorscheme(color)
   vim.api.nvim_set_hl(0, "Normal", { bg = "none" })

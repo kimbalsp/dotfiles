@@ -20,6 +20,7 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import/override with your plugins
     { import = "plugins" },
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
@@ -30,7 +31,7 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "catppuccin", "habamax" } },
+  install = { colorscheme = { "catppuccin" } },
   checker = {
     enabled = true, -- check for plugin updates periodically
     notify = false, -- notify on update
@@ -40,7 +41,6 @@ require("lazy").setup({
       -- disable some rtp plugins
       disabled_plugins = {
         "gzip",
-        "tokyonight",
         -- "matchit",
         -- "matchparen",
         -- "netrwPlugin",
@@ -52,3 +52,6 @@ require("lazy").setup({
     },
   },
 })
+
+vim.cmd("set relativenumber")
+vim.cmd.colorscheme("catppuccin")

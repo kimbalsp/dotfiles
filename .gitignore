@@ -1,0 +1,4 @@
+.config/gh/
+.config/github-copilot/
+.ssh/
+.config/tmux/plugins/
