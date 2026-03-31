@@ -1,4 +1,4 @@
-brew "bottom"
+brew "btop"
 brew "delta"
 brew "duf"
 brew "dust"
