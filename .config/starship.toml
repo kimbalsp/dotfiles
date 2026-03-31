@@ -2,7 +2,7 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = false
-format = """$path$directory$character"""
+format = """$directory$character"""
 right_format= """$all"""
 
 # Sets user-defined palette

@@ -1,7 +1,7 @@
 setopt prompt_subst
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+autoload -Uz compinit && compinit
 autoload bashcompinit && bashcompinit
-autoload -Uz compinit
 eval "$(starship init zsh)"
 
 alias reload-zsh="source ~/.zshrc"
@@ -9,8 +9,8 @@ alias edit-zsh="nvim ~/.zshrc"
 
 # history setup
 HISTFILE=$HOME/.zhistory
-SAVEHIST=1000
-HISTSIZE=999
+SAVEHIST=10000
+HISTSIZE=10000
 setopt share_history 
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
@@ -25,10 +25,10 @@ source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 export LANG=en_US.UTF-8
 
-export EDITOR=/opt/homebrew/bin/nvim
+export EDITOR=nvim
 
 # --- VIM ---
-alias v="/opt/homebrew/bin/nvim"
+alias v=nvim
 
 # --- Eza ---
 alias l="eza -l --icons --git -a"
@@ -43,64 +43,17 @@ export PATH=$PATH:/Users/spencerkimball/.spicetify
 
 export PATH="$HOME/.rbenv/shims:$PATH"
 
-# --- FZF ---
+# --- Television ---
 
-eval "$(fzf --zsh)"
-
-# --- setup fzf theme ---
-export FZF_DEFAULT_OPTS=" \
---color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
---color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
---color=selected-bg:#45475A \
---color=border:#6C7086,label:#CDD6F4"
-
-# -- Use fd instead of fzf --
-
-export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
-
-# Use fd (https://github.com/sharkdp/fd) for listing path candidates.
-# - The first argument to the function ($1) is the base path to start traversal
-# - See the source code (completion.{bash,zsh}) for the details.
-_fzf_compgen_path() {
-  fd --hidden --exclude .git . "$1"
-}
-
-# Use fd to generate the list for directory completion
-_fzf_compgen_dir() {
-  fd --type=d --hidden --exclude .git . "$1"
-}
-
-source ~/fzf-git.sh/fzf-git.sh
-
-show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
-
-export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
-export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
-
-# Advanced customization of fzf options via _fzf_comprun function
-# - The first argument to the function is the name of the command.
-# - You should make sure to pass the rest of the arguments to fzf.
-_fzf_comprun() {
-  local command=$1
-  shift
-
-  case "$command" in
-    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
-    export|unset) fzf --preview "eval 'echo \${}'"         "$@" ;;
-    ssh)          fzf --preview 'dig {}'                   "$@" ;;
-    *)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
-  esac
-}
+eval "$(tv init zsh)"
 
 alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
 
 # --- TheFuck ---
 
 # thefuck alias
-eval$(thefuck --alias)
-eval$(thefuck --alias fk)
+eval "$(thefuck --alias)"
+eval "$(thefuck --alias fk)"
 
 # --- Zoxide (better cd) ---
 eval "$(zoxide init zsh)"
@@ -110,8 +63,6 @@ alias cd="z"
 alias python="python3"
 
 # --- Yazi Setup ---
-export EDITOR="nvim"
-
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
